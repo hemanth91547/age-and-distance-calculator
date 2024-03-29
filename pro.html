@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="boot.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header{
+            text-align: center;
+            background-color: rgb(114, 203, 255);
+            padding: 10px;
+            margin: 5px;
+        }
+        .container{
+            background-color: aliceblue;
+            box-shadow: 5px 5px 5px rgb(252, 239, 239);
+            margin-top: 40px;
+            border-radius: 15px;
+        }
+        .footer{
+            margin-top: 100px;
+            background-color: rgb(151, 212, 252);
+            padding:6px ;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Age and Distance Converter</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="converter-section">
+                    <h2>Age Converter</h2>
+                    <div class="form-group">
+                        <label for="dob">Date Of Birth:</label>
+                        <input type="date" id="dob" class="form-control">
+
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="getage()">Calculate Age</button>
+                    <div class="result">
+                        <p >Age in Years : <span id="years"></span></p>
+                        <p >Age in Months : <span id="months"></span></p>
+                        <p >Age in Hours : <span id="hours"></span></p>
+                        <p >Age in Minutes : <span id="minutes"></span></p>
+                        <p >Age in Seconds : <span id="seconds"></span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="converter-section">
+                    <h2>Distance Converter</h2>
+                    <div class="form-group">
+                        <label for="distance">Distance:</label>
+                        <input type="number" id="distance" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="unit">Units: </label>
+                        <select id="unit" class="form-control">
+                            <option value="km">Kilometers</option>
+                            <option value="m">Meters</option>
+                            <option value="in">Inches</option>
+
+                        </select>
+
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="getdist()">Calculate Distance</button>
+                    <div class="result">
+                        <p>Distance In Kilometers: <span id="km"></span></p>
+                        <p>Distance In Meters: <span id="m"></span></p>
+                        <p>Distance In Inches: <span id="in"></span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="footer">
+         <center>
+            <h6>Footer Section</h5>
+         </center>
+
+    </div>
+    <script>
+        function getage(){
+            var dob=document.getElementById('dob').value;
+            var today=new Date();
+            var dateof=new Date(dob);
+            var ayears=today.getFullYear() - dateof.getFullYear();
+            var amonths=(ayears*12) + (today.getMonth() - dateof.getMonth());
+            var ahours=(ayears*365*24)+ (today.getHours()- dateof.getHours())
+            var amin= ahours * 60;
+            var asec= amin * 60;
+            document.getElementById('years').textContent=ayears;
+            document.getElementById('months').textContent=amonths;
+            document.getElementById('hours').textContent=ahours;
+            document.getElementById('minutes').textContent=amin;
+            document.getElementById('seconds').textContent=asec;
+
+
+        }
+        function getdist(){
+            var distance=document.getElementById('distance').value;
+            var unit=document.getElementById('unit').value;
+            
+            if (unit=='km'){
+                document.getElementById('km').textContent=distance;
+                document.getElementById('m').textContent=distance * 1000;
+                document.getElementById('in').textContent=distance * 39370.1;
+            }
+            else if(unit == 'm'){
+                document.getElementById('km').textContent=distance / 1000;
+                document.getElementById('m').textContent=distance;
+                document.getElementById('in').textContent=distance * 39.3701;
+
+            }
+            else if(unit == 'in'){
+                document.getElementById('km').textContent=distance / 39370.1;
+                document.getElementById('m').textContent=distance / 39.3701;
+                document.getElementById('in').textContent=distance;
+            }
+        }
+    </script>
+</body>
+</html>
